@@ -87,27 +87,71 @@ let finances = [
     ['Feb-2017', 671099]
     ];
 
-    let totalMonths = finances.length
-    console.log(totalMonths)
+    console.log("Financial Analysis");
+    console.log("---------------------------")
+    let totalMonths = finances.length;
+    console.log(`Total months: ${totalMonths}`);
     
+    // Calculate total profit by adding array elements
     let totalProfit = 0;
     
-    for( i = 0; i < totalMonths ; i++){
-        let calculateProfit;
-
-        calculateProfit = finances[0,i][0,1]
-        totalProfit = totalProfit + calculateProfit
+    for(i = 0; i < finances.length; i++){
+        
+        totalProfit = totalProfit + finances[i][1];
         
     }
 
-    console.log(totalProfit)
-   
+    console.log(`Total: ${totalProfit}`);
+       
+    // Calculate average change:
+        // Substraction current month from following to find change
+        // Adding changes 
+        // Divide total changes by number of months
     let monthlyChange = 0;
+    let totalChange = 0;
 
-    for (i=0; i< totalMonths; i++){
-        let calculateChange;
-
-        calculateChange = finances[0,i][0,1]
-        monthlyChange = 
+    for (i = 1; i < finances.length; i++){
         
+        monthlyChange = finances[i][1] - finances[i-1][1];
+        totalChange = (totalChange + monthlyChange) 
+             
     }
+    
+    let avChange = totalChange / (totalMonths-1);
+   
+    console.log(`Average Change: $${avChange.toFixed(2)}`)
+
+    
+    // Go thru the loop and find highest & lowest profit
+    // Find if month 1 is greater then 2 etc.
+    let greatIncrease = 0; 
+    let greatIncreaseDate;
+
+    for(i = 1; i < finances.length; i++){
+        if (greatIncrease > finances[i][1] - finances[i-1][1]){
+        greatIncrease = greatIncrease;
+        }
+        else{
+            greatIncrease = finances[i][1] - finances[i-1][1];
+            greatIncreaseDate = finances[i][0]
+        }
+  
+    }
+
+    console.log(`Greatest Increase in Profits: ${greatIncreaseDate} ${greatIncrease}`)
+  
+    let greatDecrease = 0;
+    let greatDecreaseDate;
+
+    for(i = 1; i < finances.length; i++){
+        if (greatDecrease < finances[i][1] - finances[i-1][1]){
+        greatDecrease = greatDecrease;
+        }
+        else{
+        greatDecrease = finances[i][1] - finances[i-1][1];
+        greatDecreaseDate = finances[i][0]
+        }
+    }
+
+    console.log(`Greatest Decrease in Profits: ${greatDecreaseDate} ${greatDecrease}`)
+    
